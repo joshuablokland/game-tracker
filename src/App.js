@@ -8,8 +8,8 @@ class App extends Component {
       <div className="App">
         <Navbar />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
