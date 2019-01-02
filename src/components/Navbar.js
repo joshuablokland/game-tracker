@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import {HOME, LOGIN} from '../routes'
+import {HOME} from '../routes'
 
 class Navbar extends Component {
   render() {
@@ -13,7 +13,7 @@ class Navbar extends Component {
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to={LOGIN}>Log in</NavLink>
+              <span onClick={this.props.toggleModal} className="nav-link">Log in</span>
             </li>
           </ul>
         </div>
