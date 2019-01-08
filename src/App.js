@@ -6,7 +6,7 @@ import { FirebaseContext } from './firebase'
 import Navbar from './components/Navbar'
 import Home from './views/Home'
 import Authentication from './components/authentication/Authentication'
-import Modal from './components/Modal'
+import Modal, {modalSizes} from './components/Modal'
 
 import './scss//main.scss'
 import '../node_modules/bootstrap/scss/bootstrap.scss'
@@ -28,7 +28,7 @@ class App extends Component {
           <div>
             <Navbar toggleModal={this.toggleModal} />
             {this.state.showModal && (
-              <Modal toggleModal={this.toggleModal}>
+              <Modal size={modalSizes.small} toggleModal={this.toggleModal}>
                 <FirebaseContext.Consumer>
                   { firebase => <Authentication firebase={firebase} /> }
                 </FirebaseContext.Consumer>

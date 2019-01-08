@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from 'react'
 
+export const modalSizes = {
+  small: 'modal-sm',
+  large: 'modal-lg',
+  extraLarge: 'modal-xl'
+}
+
 class Modal extends Component {
   
   constructor(props) {
@@ -23,7 +29,7 @@ class Modal extends Component {
     return (
       <Fragment>
         <div className="modal show" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{display: 'block'}}>
-          <div className="modal-dialog modal-dialog-centered" role="document" style={{zIndex: 1}}>
+          <div className={`modal-dialog modal-dialog-centered ${this.props.size}`} role="document" style={{zIndex: 1}}>
             <div className="modal-content">
               {this.props.title && (
                 <div className="modal-header">
