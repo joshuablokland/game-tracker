@@ -2,8 +2,38 @@ import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {HOME} from '../routes'
 
+import { withFirebase } from '../firebase'
+import { connect } from 'react-redux'
+import { SET_USER_STATUS } from '../store/actionTypes'
+
 class Navbar extends Component {
+
+  state = {
+    userLoggedIn: null
+  }
+
+  componentDidMount() {
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      // console.log(authUser)
+      authUser 
+        ? this.onUserStatusChanged( true )
+        : this.onUserStatusChanged( false )
+    })
+  }
+
+  onUserStatusChanged = status => {
+    this.props.onUserStatusChanged(status)
+    this.setState({userLoggedIn: status})
+  }
+
+  onUserSignOut = () => {
+    this.props.firebase.doSignOut()
+  }
+
   render() {
+    const signOutLink = (this.state.userLoggedIn === true) ? <span onClick={this.onUserSignOut} className="nav-link force-hover">Log out</span> : null
+    const signInLink = (this.state.userLoggedIn === false) ? <span onClick={this.props.toggleModal} className="nav-link force-hover">Log in</span> : null
+
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <a className="navbar-brand" href="http://localhost:3000">Game Tracker</a>
@@ -13,7 +43,8 @@ class Navbar extends Component {
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
             <li className="nav-item">
-              <span onClick={this.props.toggleModal} className="nav-link">Log in</span>
+              { signOutLink }
+              { signInLink }
             </li>
           </ul>
         </div>
@@ -22,4 +53,19 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+const mapStateToProps = (state, ownProps) => {
+  return { userLoggedIn: ownProps.userLoggedIn === state.userLoggedIn }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUserStatusChanged: status => {
+      dispatch({
+        type: SET_USER_STATUS,
+        payload: status
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFirebase(Navbar))

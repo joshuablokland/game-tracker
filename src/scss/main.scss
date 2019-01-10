@@ -12,3 +12,7 @@ body {
     transform: translateY(-50%);
   }
 }
+
+.force-hover:hover {
+  cursor: pointer;
+}

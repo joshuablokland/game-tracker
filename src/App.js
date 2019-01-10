@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { withFirebase } from './firebase'
-import { HOME } from './routes'
 
+import { HOME } from './routes'
 import Navbar from './components/Navbar'
 import Home from './views/Home'
 import Authentication from './components/authentication/Authentication'
@@ -20,14 +19,6 @@ class App extends Component {
       authUser: null,
       showModal: false
     }
-  }
-
-  componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null })
-    })
   }
 
   toggleModal = () => {
@@ -53,4 +44,4 @@ class App extends Component {
   }
 }
 
-export default withFirebase(App)
+export default App
