@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 class SignUpForm extends Component {
 
@@ -49,18 +51,23 @@ class SignUpForm extends Component {
 
   render() {
     const validForm = this.state.validForm
+    const validEmail = (this.validateEmail()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const validPassword = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
 
     return (
       <form onSubmit={this.onSubmit}>
         <div className="modal-body">
           <h4 className="text-center">Sign Up</h4>
-          <div className="form-group">
+          <div className="form-group form-group-validation-icon">
+            { validEmail }
             <input type="email" name="email" className="form-control" placeholder="Email address" onChange={this.handleInputChange} onBlur={this.validateEmail}/>
           </div>
-          <div className="form-group">
+          <div className="form-group form-group-validation-icon">
+            { validPassword }
             <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.handleInputChange}/>
           </div>
-          <div className="form-group">
+          <div className="form-group form-group-validation-icon">
+            { validPassword }
             <input type="password" name="passwordVerification" className="form-control" placeholder="Password verification" onChange={this.handleInputChange}/>
           </div>
         </div>
