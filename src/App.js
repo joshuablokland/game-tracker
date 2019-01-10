@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { HOME } from './routes'
-import { FirebaseContext } from './firebase'
 
 import Navbar from './components/Navbar'
 import Home from './views/Home'
@@ -29,9 +28,7 @@ class App extends Component {
             <Navbar toggleModal={this.toggleModal} />
             {this.state.showModal && (
               <Modal size={modalSizes.small} toggleModal={this.toggleModal}>
-                <FirebaseContext.Consumer>
-                  { firebase => <Authentication firebase={firebase} /> }
-                </FirebaseContext.Consumer>
+                <Authentication />
               </Modal>
             )}
             <Route exact path={HOME} component={Home} />

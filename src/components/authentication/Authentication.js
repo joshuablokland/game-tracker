@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { LOGIN } from './constants'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
@@ -19,16 +19,11 @@ class Authentication extends Component {
   }
 
   render() {
-    const renderLogin = this.state.render === LOGIN
+    const render = (this.state.render === LOGIN)
+      ? <LoginForm signUpLinkClicked={this.switchAuthenticationComponent} />
+      : <SignUpForm />
     
-    return (
-      <Fragment>
-        {renderLogin
-          ? (<LoginForm signUpLinkClicked={this.switchAuthenticationComponent}/>) 
-          : (<SignUpForm />)
-        }
-      </Fragment>
-    )
+    return render
   }
 }
 

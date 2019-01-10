@@ -1,19 +1,38 @@
 import React, { Component } from 'react'
+import { withFirebase } from '../../firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import Alert, { alertTypes } from '../Alert';
 
-class SignUpForm extends Component {
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  passwordVerification: '',
+  validForm: false,
+  error: null
+}
 
-  state = {
-    email: null,
-    password: null,
-    passwordVerification: null,
-    validForm: false
+class SignUpFormBase extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = INITIAL_STATE
   }
 
   onSubmit = event => {
     event.preventDefault()
-    console.log(event)
+
+    const { email, password } = this.state;
+
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, password)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE })
+      })
+      .catch(error => {
+        this.setState({ error: error.message })
+      })
   }
 
   handleInputChange = event => {
@@ -39,8 +58,6 @@ class SignUpForm extends Component {
 
   validatePassword = () => {
     return this.state.password === this.state.passwordVerification 
-            && this.state.password !== null 
-            && this.state.passwordVerification !== null
             && this.state.password !== '' 
             && this.state.passwordVerification !== '' 
   }
@@ -51,25 +68,27 @@ class SignUpForm extends Component {
 
   render() {
     const validForm = this.state.validForm
-    const validEmail = (this.validateEmail()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
-    const validPassword = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const validEmailIcon = (this.validateEmail()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const validPasswordIcon = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const error = (this.state.error) ? <Alert type={alertTypes.danger}>{this.state.error}</Alert> : null
 
     return (
       <form onSubmit={this.onSubmit}>
         <div className="modal-body">
           <h4 className="text-center">Sign Up</h4>
           <div className="form-group form-group-validation-icon">
-            { validEmail }
+            { validEmailIcon }
             <input type="email" name="email" className="form-control" placeholder="Email address" onChange={this.handleInputChange} onBlur={this.validateEmail}/>
           </div>
           <div className="form-group form-group-validation-icon">
-            { validPassword }
+            { validPasswordIcon }
             <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.handleInputChange}/>
           </div>
           <div className="form-group form-group-validation-icon">
-            { validPassword }
+            { validPasswordIcon }
             <input type="password" name="passwordVerification" className="form-control" placeholder="Password verification" onChange={this.handleInputChange}/>
           </div>
+          {error}
         </div>
         <div className="modal-footer">
           <button type="submit" className="btn btn-primary" disabled={!validForm}>Sign up</button>
@@ -78,5 +97,7 @@ class SignUpForm extends Component {
     )
   }
 }
+
+const SignUpForm = withFirebase(SignUpFormBase)
 
 export default SignUpForm
