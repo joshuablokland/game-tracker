@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   error: null
 }
 
-class LoginForm extends Component {
+class SignInForm extends Component {
   
   constructor(props) {
     super(props)
@@ -70,7 +70,7 @@ class LoginForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div className="modal-body">
-          <h4 className="text-center">Login</h4>
+          <h4 className="text-center">Sign in</h4>
           <div className="form-group">
             <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address" onChange={this.handleInputChange} onBlur={() => validateEmail(email)}/>
           </div>
@@ -81,11 +81,11 @@ class LoginForm extends Component {
         </div>
         <div className="modal-footer justify-content-between">
           <button type="button" className="btn btn-link" onClick={this.handleClick}>Sign up</button>
-          <button type="submit" className="btn btn-primary" disabled={!validForm}>Log in</button>
+          <button type="submit" className="btn btn-primary" disabled={!validForm}>Sign in</button>
         </div>
       </form>
     )
   }
 }
 
-export default withFirebase(LoginForm)
+export default withFirebase(SignInForm)

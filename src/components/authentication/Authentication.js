@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { LOGIN } from './constants'
-import LoginForm from './LoginForm'
+import { SIGN_IN } from './constants'
+import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
 
 class Authentication extends Component {
@@ -8,9 +8,9 @@ class Authentication extends Component {
   constructor(props) {
     super(props)
 
-    // Renders LOGIN or SIGN_UP
+    // Renders SIGN_IN or SIGN_UP
     this.state = {
-      render: LOGIN
+      render: SIGN_IN
     }
   }
 
@@ -19,8 +19,8 @@ class Authentication extends Component {
   }
 
   render() {
-    const render = (this.state.render === LOGIN)
-      ? <LoginForm signUpLinkClicked={this.switchAuthenticationComponent} />
+    const render = (this.state.render === SIGN_IN)
+      ? <SignInForm signUpLinkClicked={this.switchAuthenticationComponent} />
       : <SignUpForm />
     
     return render
