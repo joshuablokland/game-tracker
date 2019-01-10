@@ -1,6 +1,7 @@
 /**
  * USER
  */
+export const SET_AUTH_MODAL_STATUS = 'SET_AUTH_MODAL_STATUS'
 export const SET_USER_STATUS = 'SET_USER_STATUS'
 export const SET_USER_DISPLAY_NAME = 'SET_USER_DISPLAY_NAME'
 export const SET_USER_UID = 'SET_USER_UID'
