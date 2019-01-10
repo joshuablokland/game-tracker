@@ -3,6 +3,7 @@ import { withFirebase } from '../../firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import Alert, { alertTypes } from '../Alert';
+import validateEmail from './functions/validateEmail';
 
 const INITIAL_STATE = {
   email: '',
@@ -51,11 +52,6 @@ class SignUpFormBase extends Component {
     })
   }
 
-  validateEmail = () => {
-    const REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return REGEX.test(this.state.email)
-  }
-
   validatePassword = () => {
     return this.state.password === this.state.passwordVerification 
             && this.state.password !== '' 
@@ -63,12 +59,13 @@ class SignUpFormBase extends Component {
   }
 
   validateForm = () => {
-    return this.validateEmail() && this.validatePassword()
+    return validateEmail(this.state.email) && this.validatePassword()
   }
 
   render() {
+    const email = this.state.email
     const validForm = this.state.validForm
-    const validEmailIcon = (this.validateEmail()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const validEmailIcon = (validateEmail(email)) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
     const validPasswordIcon = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
     const error = (this.state.error) ? <Alert type={alertTypes.danger}>{this.state.error}</Alert> : null
 
@@ -78,7 +75,7 @@ class SignUpFormBase extends Component {
           <h4 className="text-center">Sign Up</h4>
           <div className="form-group form-group-validation-icon">
             { validEmailIcon }
-            <input type="email" name="email" className="form-control" placeholder="Email address" onChange={this.handleInputChange} onBlur={this.validateEmail}/>
+            <input type="email" name="email" className="form-control" placeholder="Email address" onChange={this.handleInputChange} onBlur={() => {validateEmail(email)}}/>
           </div>
           <div className="form-group form-group-validation-icon">
             { validPasswordIcon }
