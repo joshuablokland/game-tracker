@@ -8,10 +8,6 @@ import { SET_USER_STATUS } from '../store/actionTypes'
 
 class Navbar extends Component {
 
-  state = {
-    userLoggedIn: null
-  }
-
   componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       // console.log(authUser)
@@ -23,7 +19,6 @@ class Navbar extends Component {
 
   onUserStatusChanged = status => {
     this.props.onUserStatusChanged(status)
-    this.setState({userLoggedIn: status})
   }
 
   onUserSignOut = () => {
@@ -31,8 +26,8 @@ class Navbar extends Component {
   }
 
   render() {
-    const signOutLink = (this.state.userLoggedIn === true) ? <span onClick={this.onUserSignOut} className="nav-link force-hover">Log out</span> : null
-    const signInLink = (this.state.userLoggedIn === false) ? <span onClick={this.props.toggleModal} className="nav-link force-hover">Log in</span> : null
+    const signOutLink = (this.props.userLoggedIn === true) ? <span onClick={this.onUserSignOut} className="nav-link force-hover">Sign out</span> : null
+    const signInLink = (this.props.userLoggedIn === false) ? <span onClick={this.props.toggleModal} className="nav-link force-hover">Sign in</span> : null
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -53,9 +48,7 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { userLoggedIn: ownProps.userLoggedIn === state.userLoggedIn }
-}
+const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
 
 const mapDispatchToProps = dispatch => {
   return {
