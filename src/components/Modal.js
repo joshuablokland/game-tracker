@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { SET_MODAL_STATUS } from '../store/actionTypes'
 
 export const modalSizes = {
   small: 'modal-sm',
@@ -22,9 +24,9 @@ class Modal extends Component {
   }
 
   toggleModalOnEsc = (e) => {
-    if (e.keyCode === 27) this.props.toggleModal()
+    if (e.keyCode === 27) this.props.onModalStatusChanged(false)
   }
-
+  
   render() {
     return (
       <Fragment>
@@ -49,4 +51,16 @@ class Modal extends Component {
   }
 }
 
-export default Modal
+const mapStateToProps = (state) => ({ modalOpen: state.modalOpen })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onModalStatusChanged: status => {
+      dispatch({
+        type: SET_MODAL_STATUS,
+        payload: status
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Modal)

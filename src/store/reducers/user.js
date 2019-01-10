@@ -1,5 +1,5 @@
 import {
-  SET_AUTH_MODAL_STATUS,
+  SET_MODAL_STATUS,
   SET_USER_STATUS, 
   SET_USER_DISPLAY_NAME, 
   SET_USER_UID
@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   userLoggedIn: false,
-  authModal: false,
+  modalOpen: false,
   user: {
     displayName: '',
     uid: ''
@@ -16,10 +16,10 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case SET_AUTH_MODAL_STATUS:
+    case SET_MODAL_STATUS:
       return {
         ...state,
-        authModal: action.payload
+        modalOpen: action.payload
       }
     case SET_USER_STATUS:
       return {

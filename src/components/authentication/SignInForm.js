@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+
 import { withFirebase } from '../../firebase'
+import { SET_MODAL_STATUS } from '../../store/actionTypes'
+import { connect } from 'react-redux'
+
 import { SIGN_UP } from './constants'
 import validateEmail from './functions/validateEmail'
 import Alert, { alertTypes } from '../Alert';
@@ -22,15 +26,16 @@ class SignInForm extends Component {
   onSubmit = event => {
     event.preventDefault()
     
-    const { email, password } = this.state;
+    const { email, password } = this.state
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
+        this.setState({ ...INITIAL_STATE })
+        this.onModalStatusChanged(false)
       })
       .catch(error => {
-        this.setState({ error: error.message });
+        this.setState({ error: error.message })
       });
   }
 
@@ -62,6 +67,10 @@ class SignInForm extends Component {
     this.props.signUpLinkClicked({render: SIGN_UP})
   }
 
+  onModalStatusChanged = status => {
+    this.props.onModalStatusChanged(status)
+  }
+
   render() {
     const email = this.state.email
     const validForm = this.state.validForm
@@ -88,4 +97,17 @@ class SignInForm extends Component {
   }
 }
 
-export default withFirebase(SignInForm)
+const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onModalStatusChanged: status => {
+      dispatch({
+        type: SET_MODAL_STATUS,
+        payload: status
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFirebase(SignInForm))

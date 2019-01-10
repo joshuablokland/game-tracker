@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { HOME } from './routes'
 import Navbar from './components/Navbar'
@@ -12,27 +13,14 @@ import '../node_modules/bootstrap/scss/bootstrap.scss'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      authUser: null,
-      showModal: false
-    }
-  }
-
-  toggleModal = () => {
-    this.setState({showModal: !this.state.showModal})
-  }
-
   render() {
     return (
       <div className="App">
         <Router>
           <div>
-            <Navbar toggleModal={this.toggleModal} />
-            {this.state.showModal && (
-              <Modal size={modalSizes.small} toggleModal={this.toggleModal}>
+            <Navbar />
+            {this.props.modalOpen && (
+              <Modal size={modalSizes.small}>
                 <Authentication />
               </Modal>
             )}
@@ -44,4 +32,6 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = (state) => ({ modalOpen: state.modalOpen })
+
+export default connect(mapStateToProps)(App)

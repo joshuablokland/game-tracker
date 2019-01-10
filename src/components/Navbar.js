@@ -4,7 +4,7 @@ import {HOME} from '../routes'
 
 import { withFirebase } from '../firebase'
 import { connect } from 'react-redux'
-import { SET_USER_STATUS } from '../store/actionTypes'
+import { SET_MODAL_STATUS, SET_USER_STATUS } from '../store/actionTypes'
 
 class Navbar extends Component {
 
@@ -25,9 +25,13 @@ class Navbar extends Component {
     this.props.firebase.doSignOut()
   }
 
+  onModalStatusChanged = status => {
+    this.props.onModalStatusChanged(status)
+  }
+
   render() {
     const signOutLink = (this.props.userLoggedIn === true) ? <span onClick={this.onUserSignOut} className="nav-link force-hover">Sign out</span> : null
-    const signInLink = (this.props.userLoggedIn === false) ? <span onClick={this.props.toggleModal} className="nav-link force-hover">Sign in</span> : null
+    const signInLink = (this.props.userLoggedIn === false) ? <span onClick={() => this.onModalStatusChanged(true)} className="nav-link force-hover">Sign in</span> : null
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -55,6 +59,12 @@ const mapDispatchToProps = dispatch => {
     onUserStatusChanged: status => {
       dispatch({
         type: SET_USER_STATUS,
+        payload: status
+      })
+    },
+    onModalStatusChanged: status => {
+      dispatch({
+        type: SET_MODAL_STATUS,
         payload: status
       })
     }
