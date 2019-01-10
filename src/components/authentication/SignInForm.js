@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withFirebase } from '../../firebase'
-import { SET_MODAL_STATUS } from '../../store/actionTypes'
+import { setModalStatus } from '../../store/actionTypes'
 import { connect } from 'react-redux'
 
 import { SIGN_UP } from './constants'
@@ -101,12 +101,7 @@ const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
 
 const mapDispatchToProps = dispatch => {
   return {
-    onModalStatusChanged: status => {
-      dispatch({
-        type: SET_MODAL_STATUS,
-        payload: status
-      })
-    }
+    onModalStatusChanged: status => dispatch(setModalStatus(status))
   }
 }
 

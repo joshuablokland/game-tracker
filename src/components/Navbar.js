@@ -4,7 +4,7 @@ import {HOME} from '../routes'
 
 import { withFirebase } from '../firebase'
 import { connect } from 'react-redux'
-import { SET_MODAL_STATUS, SET_USER_STATUS } from '../store/actionTypes'
+import { setModalStatus, setUserStatus } from '../store/actionTypes'
 
 class Navbar extends Component {
 
@@ -56,18 +56,8 @@ const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUserStatusChanged: status => {
-      dispatch({
-        type: SET_USER_STATUS,
-        payload: status
-      })
-    },
-    onModalStatusChanged: status => {
-      dispatch({
-        type: SET_MODAL_STATUS,
-        payload: status
-      })
-    }
+    onUserStatusChanged: status => dispatch(setUserStatus(status)),
+    onModalStatusChanged: status => dispatch(setModalStatus(status))
   }
 }
 
