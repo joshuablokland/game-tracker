@@ -1,11 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from '../App';
+import React from 'react'
+import { shallow } from 'enzyme'
+import { App } from '../App'
+import { Navbar } from '../components/Navbar'
 
-jest.mock('../components/Navbar', () => () => 'Navbar')
+const navBarSetup = {
+  auth: {
+    onAuthStateChanged: () => false
+  }
+}
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('<App />', () => {
+
+  it('renders without crashing', () => {
+    const wrapper = shallow(<App />)
+    expect(wrapper.exists()).toEqual(true)
+  })
+
+  it('renders a navbar', () => {
+    const wrapper = shallow(<Navbar firebase={navBarSetup} />)
+    expect(wrapper.exists()).toEqual(true)
+  })
+})
+

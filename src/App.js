@@ -17,7 +17,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div>
+          <div id="appWrapper">
             <Navbar />
             {this.props.modalOpen && (
               <Modal size={modalSizes.small}>

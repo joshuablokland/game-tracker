@@ -33,6 +33,7 @@
   "devDependencies": {
     "bootstrap": "^4.2.1",
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.7.1"
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest-enzyme": "^7.0.1"
   }
 }
