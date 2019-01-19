@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { HOME } from './routes'
 import Navbar from './components/Navbar'
 import Home from './views/Home'
-import Authentication from './components/authentication/Authentication'
+import Authentication from './components/Authentication'
 import Modal, {modalSizes} from './components/Modal'
 
 import './scss//main.scss'
 import '../node_modules/bootstrap/scss/bootstrap.scss'
 
-class App extends Component {
+export class App extends Component {
 
   render() {
     return (
