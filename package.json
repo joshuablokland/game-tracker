@@ -31,6 +31,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "bootstrap": "^4.2.1"
+    "bootstrap": "^4.2.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1"
   }
 }
