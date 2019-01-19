@@ -6,15 +6,14 @@ import { withFirebase } from '../firebase'
 import { connect } from 'react-redux'
 import { setModalStatus, setUserStatus } from '../store/actionTypes'
 
-class Navbar extends Component {
+export class Navbar extends Component {
 
   componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => {
-      // console.log(authUser)
+    this.props.firebase.auth.onAuthStateChanged(authUser => 
       authUser 
         ? this.onUserStatusChanged( true )
         : this.onUserStatusChanged( false )
-    })
+    )
   }
 
   onUserStatusChanged = status => {
