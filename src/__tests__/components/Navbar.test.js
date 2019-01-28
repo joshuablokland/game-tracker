@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { Navbar } from '../../components/Navbar'
 
 const navBarProps = {
@@ -20,7 +20,7 @@ describe('<Navbar />', () => {
   })
 
   it('renders a sign in link', () => {
-    const navbar = mount(<Navbar {...navBarProps}/>)
+    const navbar = shallow(<Navbar {...navBarProps}/>)
     const signInLink = navbar.find('#signIn')
 
     expect(signInLink.exists()).toEqual(true)
@@ -28,7 +28,7 @@ describe('<Navbar />', () => {
 
   it('renders a sign out link', () => {
     const navBarPropsSignOut = { ...navBarProps, userLoggedIn: true }
-    const navbar = mount(<Navbar {...navBarPropsSignOut}/>)
+    const navbar = shallow(<Navbar {...navBarPropsSignOut}/>)
     const signOutLink = navbar.find('#signOut')
 
     expect(signOutLink.exists()).toEqual(true)

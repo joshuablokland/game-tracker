@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
-import {HOME} from '../routes'
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+import { HOME } from '../routes'
 
 import { withFirebase } from '../firebase'
 import { connect } from 'react-redux'
@@ -39,7 +39,7 @@ export class Navbar extends Component {
         <div className="collapse navbar-collapse show" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              {/* <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink> */}
+              <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
             <li className="nav-item">
               { authLink }
