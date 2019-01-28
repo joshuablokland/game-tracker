@@ -29,8 +29,9 @@ export class Navbar extends Component {
   }
 
   render() {
-    const signOutLink = (this.props.userLoggedIn === true) ? <span onClick={this.onUserSignOut} className="nav-link force-hover">Sign out</span> : null
-    const signInLink = (this.props.userLoggedIn === false) ? <span onClick={() => this.onModalStatusChanged(true)} className="nav-link force-hover">Sign in</span> : null
+    const authLink = (this.props.userLoggedIn === true) 
+      ? <span onClick={this.onUserSignOut} id="signOut" className="nav-link force-hover">Sign out</span>
+      : <span onClick={() => this.onModalStatusChanged(true)} id="signIn" className="nav-link force-hover">Sign in</span>
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -38,11 +39,10 @@ export class Navbar extends Component {
         <div className="collapse navbar-collapse show" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
+              {/* <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink> */}
             </li>
             <li className="nav-item">
-              { signOutLink }
-              { signInLink }
+              { authLink }
             </li>
           </ul>
         </div>
