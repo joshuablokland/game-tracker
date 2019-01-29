@@ -14,21 +14,21 @@ describe('<Modal />', () => {
     const modal = shallow(<Modal size={MODAL_SIZES.small}/>)
     const modalDialog = modal.find('#modalDialog')
     
-    expect(modalDialog.hasClass(MODAL_SIZES.small)).toEqual(true)
+    expect(modalDialog.hasClass('modal-sm')).toEqual(true)
   })
 
   it('renders a large modal', () => {
     const modal = shallow(<Modal size={MODAL_SIZES.large}/>)
     const modalDialog = modal.find('#modalDialog')
     
-    expect(modalDialog.hasClass(MODAL_SIZES.large)).toEqual(true)
+    expect(modalDialog.hasClass('modal-lg')).toEqual(true)
   })
 
   it('renders a large modal', () => {
     const modal = shallow(<Modal size={MODAL_SIZES.extraLarge}/>)
     const modalDialog = modal.find('#modalDialog')
     
-    expect(modalDialog.hasClass(MODAL_SIZES.extraLarge)).toEqual(true)
+    expect(modalDialog.hasClass('modal-xl')).toEqual(true)
   })
 
   it('renders a title', () => {
