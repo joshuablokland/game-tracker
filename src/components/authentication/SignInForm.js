@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { SIGN_UP } from './constants'
 import validateEmail from './functions/validateEmail'
-import Alert, { alertTypes } from '../Alert';
+import Alert, { ALERT_TYPES } from '../Alert';
 
 const INITIAL_STATE = {
   email: '',
@@ -74,7 +74,7 @@ class SignInForm extends Component {
   render() {
     const email = this.state.email
     const validForm = this.state.validForm
-    const error = (this.state.error) ? <Alert type={alertTypes.danger}>{this.state.error}</Alert> : null
+    const error = (this.state.error) ? <Alert type={ALERT_TYPES.danger}>{this.state.error}</Alert> : null
 
     return (
       <form onSubmit={this.onSubmit}>

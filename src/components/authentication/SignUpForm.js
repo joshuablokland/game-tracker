@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from '../../firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import Alert, { alertTypes } from '../Alert';
+import Alert, { ALERT_TYPES } from '../Alert';
 import validateEmail from './functions/validateEmail';
 
 const INITIAL_STATE = {
@@ -67,7 +67,7 @@ class SignUpFormBase extends Component {
     const validForm = this.state.validForm
     const validEmailIcon = (validateEmail(email)) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
     const validPasswordIcon = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
-    const error = (this.state.error) ? <Alert type={alertTypes.danger}>{this.state.error}</Alert> : null
+    const error = (this.state.error) ? <Alert type={ALERT_TYPES.danger}>{this.state.error}</Alert> : null
 
     return (
       <form onSubmit={this.onSubmit}>

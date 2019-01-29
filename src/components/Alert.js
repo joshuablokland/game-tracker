@@ -1,12 +1,12 @@
 import React from 'react'
 
-const alertTypes = {
+const ALERT_TYPES = {
   success: 'alert-success',
   danger: 'alert-danger'
 }
 
 const Alert = (props) => {
-  const type = (props.type) ? props.type : alertTypes.success
+  const type = (props.type) ? props.type : ALERT_TYPES.success
 
   return (
     <div className={`alert ${type}`} role="alert">
@@ -15,5 +15,5 @@ const Alert = (props) => {
   )
 }
 
-export { alertTypes }
+export { ALERT_TYPES }
 export default Alert;
