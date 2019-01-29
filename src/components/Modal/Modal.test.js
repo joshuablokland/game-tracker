@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import { Modal, MODAL_SIZES } from '../../components/Modal'
+import { Modal, MODAL_SIZES } from './index'
 
 describe('<Modal />', () => {
 

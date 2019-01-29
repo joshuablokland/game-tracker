@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Alert, { ALERT_TYPES } from '../../components/Alert'
+import Alert, { ALERT_TYPES } from './index'
 
 describe('<Alert />', () => {
 

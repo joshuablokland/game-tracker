@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { HOME } from '../routes'
+import { HOME } from '../../routes'
 
-import { withFirebase } from '../firebase'
+import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
-import { setModalStatus, setUserStatus } from '../store/actionTypes'
+import { setModalStatus, setUserStatus } from '../../store/actionTypes'
 
 export class Navbar extends Component {
 

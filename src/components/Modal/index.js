@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { setModalStatus } from '../store/actionTypes'
+import { setModalStatus } from '../../store/actionTypes'
 
 export const MODAL_SIZES = {
   small: 'modal-sm',
