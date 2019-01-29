@@ -6,7 +6,7 @@ import { HOME } from './routes'
 import Navbar from './components/Navbar'
 import Home from './views/Home'
 import Authentication from './components/Authentication'
-import Modal, {modalSizes} from './components/Modal'
+import Modal, { MODAL_SIZES } from './components/Modal'
 
 import './scss//main.scss'
 import '../node_modules/bootstrap/scss/bootstrap.scss'
@@ -15,7 +15,7 @@ export class App extends Component {
 
   render() {
     const modal = (this.props.modalOpen) ? (
-      <Modal size={modalSizes.small}>
+      <Modal size={MODAL_SIZES.small}>
         <Authentication />
       </Modal>
     ) : null
