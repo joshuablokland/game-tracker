@@ -1,6 +1,6 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
-import { SignInForm, INITIAL_STATE } from './index'
+import { shallow } from 'enzyme'
+import { SignInForm } from './index'
 
 describe('<SignInForm />', () => {
 

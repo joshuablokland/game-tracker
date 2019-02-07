@@ -1,16 +1,16 @@
 import {
   SET_MODAL_STATUS,
-  SET_USER_STATUS, 
-  SET_USER_DISPLAY_NAME, 
-  SET_USER_UID
+  SET_USER_STATUS,
+  SET_USER
 } from '../actionTypes'
 
 const initialState = {
   userLoggedIn: false,
   modalOpen: false,
   user: {
-    displayName: '',
-    uid: ''
+    displayName: null,
+    email: null,
+    uid: null
   }
 }
 
@@ -26,21 +26,10 @@ const user = (state = initialState, action) => {
         ...state, 
         userLoggedIn: action.payload 
       }
-    case SET_USER_DISPLAY_NAME:
+    case SET_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          displayName: action.payload
-        }
-      }
-    case SET_USER_UID:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          uid: action.payload
-        }
+        user: action.payload
       }
     default: 
       return state

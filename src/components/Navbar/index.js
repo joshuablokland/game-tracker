@@ -4,20 +4,29 @@ import { HOME } from '../../routes'
 
 import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
-import { setModalStatus, setUserStatus } from '../../store/actionTypes'
+import { setModalStatus, setUserStatus, setUser } from '../../store/actionTypes'
 
 export class Navbar extends Component {
 
   componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => 
-      authUser 
-        ? this.onUserStatusChanged( true )
-        : this.onUserStatusChanged( false )
-    )
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      const isLoggedIn = authUser ? true : false
+      this.onUserStatusChanged(isLoggedIn)
+      if (isLoggedIn); this.onSetUserStatus(authUser)
+    })
   }
 
   onUserStatusChanged = status => {
     this.props.onUserStatusChanged(status)
+  }
+
+  onSetUserStatus = user => {
+    const _user = {
+      displayName: '',
+      email: user.email,
+      uid: user.uid
+    }
+    this.props.onSetUser(_user)
   }
 
   onUserSignOut = () => {
@@ -56,7 +65,8 @@ const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
 const mapDispatchToProps = dispatch => {
   return {
     onUserStatusChanged: status => dispatch(setUserStatus(status)),
-    onModalStatusChanged: status => dispatch(setModalStatus(status))
+    onModalStatusChanged: status => dispatch(setModalStatus(status)),
+    onSetUser: user => dispatch(setUser(user))
   }
 }
 
