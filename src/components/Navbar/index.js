@@ -6,13 +6,17 @@ import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
 import { setModalStatus, setUserStatus, setUser } from '../../store/actionTypes'
 
+import Gravatar from '../Gravatar'
+
 export class Navbar extends Component {
 
   componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       const isLoggedIn = authUser ? true : false
       this.onUserStatusChanged(isLoggedIn)
-      if (isLoggedIn); this.onSetUserStatus(authUser)
+      if (isLoggedIn) { 
+        this.onSetUser(authUser)
+      }
     })
   }
 
@@ -20,7 +24,7 @@ export class Navbar extends Component {
     this.props.onUserStatusChanged(status)
   }
 
-  onSetUserStatus = user => {
+  onSetUser = user => {
     const _user = {
       displayName: '',
       email: user.email,
@@ -43,15 +47,18 @@ export class Navbar extends Component {
       : <span onClick={() => this.onModalStatusChanged(true)} id="signIn" className="nav-link force-hover">Sign in</span>
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
         <a className="navbar-brand" href="http://localhost:3000">Game Tracker</a>
-        <div className="collapse navbar-collapse show" id="navbarNav">
+        <div className="collapse navbar-collapse show flex-grow-0" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
             <li className="nav-item">
               { authLink }
+            </li>
+            <li>
+              {this.props.user.email && <Gravatar email={this.props.user.email} />}
             </li>
           </ul>
         </div>
@@ -60,7 +67,10 @@ export class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ userLoggedIn: state.userLoggedIn })
+const mapStateToProps = (state) => ({ 
+  userLoggedIn: state.userLoggedIn,
+  user: state.user
+})
 
 const mapDispatchToProps = dispatch => {
   return {
