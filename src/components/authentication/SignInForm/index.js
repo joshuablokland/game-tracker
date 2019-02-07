@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 
-import { withFirebase } from '../../firebase'
-import { setModalStatus } from '../../store/actionTypes'
+import { withFirebase } from '../../../firebase'
+import { setModalStatus } from '../../../store/actionTypes'
 import { connect } from 'react-redux'
 
-import { SIGN_UP } from './constants'
-import validateEmail from './functions/validateEmail'
-import Alert, { ALERT_TYPES } from '../Alert';
+import { SIGN_UP } from '../constants'
+import validateEmail from '../functions/validateEmail'
+import Alert, { ALERT_TYPES } from '../../Alert';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   email: '',
   password: '',
   validForm: false,
   error: null
 }
 
-class SignInForm extends Component {
+export class SignInForm extends Component {
   
   constructor(props) {
     super(props)
@@ -81,10 +81,10 @@ class SignInForm extends Component {
         <div className="modal-body">
           <h4 className="text-center">Sign in</h4>
           <div className="form-group">
-            <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address" onChange={this.handleInputChange} onBlur={() => validateEmail(email)}/>
+            <input type="email" name="email" className="form-control" id="inputEmailAddress" aria-describedby="emailHelp" placeholder="Email address" onChange={this.handleInputChange} onBlur={() => validateEmail(email)}/>
           </div>
           <div className="form-group">
-            <input type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleInputChange}/>
+            <input type="password" name="password" className="form-control" id="inputPassword" placeholder="Password" onChange={this.handleInputChange}/>
           </div>
           { error }
         </div>

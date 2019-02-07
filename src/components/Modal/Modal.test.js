@@ -56,7 +56,7 @@ describe('<Modal />', () => {
       map[event] = cb;
     });
 
-    const spy = jest.spyOn(Modal.prototype, 'closeModalOnEsc');
+    const spy = jest.spyOn(Modal.prototype, 'closeModalOnEsc')
     const modal = mount(<Modal onModalStatusChanged={jest.fn}/>)
     
     map.keyup({ keyCode: 27 });
