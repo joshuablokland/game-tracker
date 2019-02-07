@@ -8,7 +8,12 @@ const navBarProps = {
       onAuthStateChanged: () => false
     }
   },
-  userLoggedIn: false
+  userLoggedIn: false,
+  user: {
+    displayName: null,
+    email: null,
+    uid: null
+  }
 }
 
 describe('<Navbar />', () => {

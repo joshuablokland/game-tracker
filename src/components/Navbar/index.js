@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { setModalStatus, setUserStatus, setUser } from '../../store/actionTypes'
 
 import Gravatar from '../Gravatar'
+import Dropdown from '../Dropdown'
 
 export class Navbar extends Component {
 
@@ -34,6 +35,7 @@ export class Navbar extends Component {
   }
 
   onUserSignOut = () => {
+    console.log('bla')
     this.props.firebase.doSignOut()
   }
 
@@ -41,11 +43,28 @@ export class Navbar extends Component {
     this.props.onModalStatusChanged(status)
   }
 
-  render() {
-    const authLink = (this.props.userLoggedIn === true) 
-      ? <span onClick={this.onUserSignOut} id="signOut" className="nav-link force-hover">Sign out</span>
-      : <span onClick={() => this.onModalStatusChanged(true)} id="signIn" className="nav-link force-hover">Sign in</span>
+  renderProfileMenu = userStatus => {
+    if (!userStatus) {
+      return (
+        <li className="nav-item">
+          <span onClick={() => this.onModalStatusChanged(true)} id="signIn" className="nav-link force-hover">Sign in</span>
+        </li>
+      )
+    } else {
+      const userAvatar = this.props.user.email ? <Gravatar email={this.props.user.email} /> : 'Profile'
+      return (
+        <Dropdown label={userAvatar} align="dropdown-menu-right">
+          <span onClick={this.onUserSignOut} id="signOut" className="force-hover dropdown-item">Sign out</span>
+          <a className="dropdown-item" href="#">Another action</a>
+          <a className="dropdown-item" href="#">Something else here</a>
+        </Dropdown>
+      )
+    }
+  }
 
+  render() {
+    const profileMenu = this.renderProfileMenu(this.props.userLoggedIn)
+  
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
         <a className="navbar-brand" href="http://localhost:3000">Game Tracker</a>
@@ -54,12 +73,7 @@ export class Navbar extends Component {
             <li className="nav-item">
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
-            <li className="nav-item">
-              { authLink }
-            </li>
-            <li>
-              {this.props.user.email && <Gravatar email={this.props.user.email} />}
-            </li>
+            { profileMenu }
           </ul>
         </div>
       </nav>
