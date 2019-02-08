@@ -28,7 +28,6 @@ class Dropdown extends Component {
       return (
         <div 
           className="force-hover"
-          tabIndex="0"
           onClick={this.handleClick}
           // onBlur={this.handleClick}
         >

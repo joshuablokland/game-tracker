@@ -53,7 +53,7 @@ export class Navbar extends Component {
       const userAvatar = this.props.user.email 
         ? (
           <div>
-            { this.props.user.displayName }
+            <span className="py-2 ml-1 d-inline-flex">{ this.props.user.displayName }</span>
             <Gravatar email={this.props.user.email} />
           </div>
         ) : 'Profile'

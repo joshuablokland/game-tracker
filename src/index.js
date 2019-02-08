@@ -9,7 +9,7 @@ import Firebase, { FirebaseContext } from './firebase'
 
 const store = createStore(user)
 
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+// const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
