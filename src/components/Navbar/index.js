@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { HOME } from '../../routes'
+import { HOME, ACCOUNT } from '../../routes'
 
 import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
@@ -27,7 +27,7 @@ export class Navbar extends Component {
 
   onSetUser = user => {
     const _user = {
-      displayName: '',
+      displayName: user.displayName,
       email: user.email,
       uid: user.uid
     }
@@ -35,7 +35,6 @@ export class Navbar extends Component {
   }
 
   onUserSignOut = () => {
-    console.log('bla')
     this.props.firebase.doSignOut()
   }
 
@@ -55,8 +54,7 @@ export class Navbar extends Component {
       return (
         <Dropdown label={userAvatar} align="dropdown-menu-right">
           <span onClick={this.onUserSignOut} id="signOut" className="force-hover dropdown-item">Sign out</span>
-          <a className="dropdown-item" href="#">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a>
+          <NavLink className="dropdown-item" activeClassName="" to={ACCOUNT}>Account</NavLink>
         </Dropdown>
       )
     }
