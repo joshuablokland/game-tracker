@@ -50,7 +50,13 @@ export class Navbar extends Component {
         </li>
       )
     } else {
-      const userAvatar = this.props.user.email ? <Gravatar email={this.props.user.email} /> : 'Profile'
+      const userAvatar = this.props.user.email 
+        ? (
+          <div>
+            { this.props.user.displayName }
+            <Gravatar email={this.props.user.email} />
+          </div>
+        ) : 'Profile'
       return (
         <Dropdown label={userAvatar} align="dropdown-menu-right">
           <span onClick={this.onUserSignOut} id="signOut" className="force-hover dropdown-item">Sign out</span>

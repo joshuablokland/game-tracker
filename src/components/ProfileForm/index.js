@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withFirebase } from '../../firebase'
+import { connect } from 'react-redux'
+import { setUserName } from '../../store/actionTypes'
 import Alert, { 
   ALERT_TYPES, 
   ALERT_SPACING 
@@ -61,7 +63,8 @@ class ProfileForm extends Component {
     event.preventDefault()
     this.props.firebase.doUpdateProfile(this.state.user)
       .then(() => {
-        this.setState({ 
+        this.props.onSetUserName(this.state.user.displayName)
+        this.setState({
           success: 'Your profile has been updated.'
         }, () => {
           setTimeout(() => {
@@ -122,4 +125,8 @@ class ProfileForm extends Component {
   }
 }
 
-export default withFirebase(ProfileForm)
+const mapDispatchToProps = dispatch => ({
+  onSetUserName: userName => dispatch(setUserName(userName))
+})
+
+export default connect(null, mapDispatchToProps)(withFirebase(ProfileForm))

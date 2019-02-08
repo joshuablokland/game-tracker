@@ -1,7 +1,8 @@
 import {
   SET_MODAL_STATUS,
   SET_USER_STATUS,
-  SET_USER
+  SET_USER,
+  SET_USER_NAME
 } from '../actionTypes'
 
 const initialState = {
@@ -30,6 +31,14 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload
+      }
+    case SET_USER_NAME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          displayName: action.payload
+        }
       }
     default: 
       return state
