@@ -33,6 +33,8 @@ class ProfileForm extends Component {
 
   setUserProfile = user => {
     const { displayName, email } = user
+    const emailVerified = user.emailVerified
+
     this.setState({ 
       ...this.state, 
       ...{ 
@@ -40,7 +42,8 @@ class ProfileForm extends Component {
           displayName, 
           email 
         } 
-      }
+      },
+      emailVerified
     })
   }
 
@@ -78,6 +81,25 @@ class ProfileForm extends Component {
       }))
   }
 
+  handleClick = event => {
+    event.preventDefault()
+    
+    this.props.firebase.doSendEmailVerification()
+      .then(() => {
+        this.setState({
+          success: `An email has been sent to ${this.state.user.email}`
+        }, () => {
+          setTimeout(() => {
+            this.setState({success: null})
+          }, 3000)
+        })
+      })
+      .catch(error => this.setState({
+        ...this.state,
+        error
+      }))
+  }
+
   renderMessage = () => {
     if (this.state.error) {
       return <Alert type={ALERT_TYPES.danger} spacing={ALERT_SPACING.mt_4}>{this.state.error}</Alert>
@@ -90,6 +112,13 @@ class ProfileForm extends Component {
 
   render () {
     const message = this.renderMessage()
+    const verifyEmailMessage = (!this.state.emailVerified) 
+      ? (
+        <small className="form-text text-muted">
+          You haven't verified your emailaddress yet, 
+          <a href="/" onClick={this.handleClick}>send a verification email.</a>
+        </small>
+      ) : null
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -117,6 +146,7 @@ class ProfileForm extends Component {
             placeholder="Enter your name"
             disabled
           />
+          {verifyEmailMessage}
         </div>
         <button type="submit" className="btn btn-primary">Save changes</button>
         { message }

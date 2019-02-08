@@ -28,6 +28,8 @@ class Firebase {
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password)
 
   doUpdateProfile = options => this.auth.currentUser.updateProfile(options)
+
+  doSendEmailVerification = () => this.auth.currentUser.sendEmailVerification()
 }
 
 export default Firebase;
