@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { HOME, ACCOUNT } from './routes'
+import { HOME, ACCOUNT, SEARCH } from './routes'
 import Navbar from './components/Navbar'
 import Home from './views/Home'
 import Account from './views/Account'
+import Search from './views/Search'
 import Authentication from './components/Authentication'
 import Modal, { MODAL_SIZES } from './components/Modal'
 
@@ -30,6 +31,7 @@ export class App extends Component {
             <Switch>
               <Route exact path={HOME} component={Home} />
               <Route exact path={ACCOUNT} component={Account} />
+              <Route patch={SEARCH} component={Search} />
             </Switch>
           </div>
         </Router>
