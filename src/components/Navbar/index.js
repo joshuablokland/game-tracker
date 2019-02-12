@@ -8,6 +8,7 @@ import { setModalStatus, setUserStatus, setUser } from '../../store/actionTypes'
 
 import Gravatar from '../Gravatar'
 import Dropdown from '../Dropdown'
+import Search from './Search'
 
 export class Navbar extends Component {
 
@@ -72,6 +73,7 @@ export class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
         <a className="navbar-brand" href="http://localhost:3000">Game Tracker</a>
+        <Search />
         <div className="collapse navbar-collapse show flex-grow-0" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
