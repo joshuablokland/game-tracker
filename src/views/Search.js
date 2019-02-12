@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import SearchResult from '../components/SearchResult'
 
 class Search extends Component {
 
@@ -34,10 +35,14 @@ class Search extends Component {
   }
 
   render () {
-    const searchResults = (this.state.searchResults) ? this.state.searchResults.map(game => <div key={game.id}>{game.name}</div>) : null
+    const searchResults = (this.state.searchResults) ? this.state.searchResults.map(game => <SearchResult key={game.id} title={game.name} />) : null
     return (
-      <div>
-        {searchResults}
+      <div className="container-fluid py-4">
+        <div className="row">
+          <div className="col">
+            {searchResults}
+          </div>
+        </div>
       </div>
     )
   }
