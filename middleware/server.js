@@ -1,26 +1,31 @@
+require('dotenv').config()
+
 const axios = require('axios')
 const express = require('express')
 const cors = require('cors')
 
 const app = express()
-
 app.use(express.json())
 app.use(cors())
 
+const instance = axios.create({
+  baseURL: 'https://api-v3.igdb.com',
+  timeout: 1000,
+  headers: {
+    Accept: 'application/json',
+    'user-key': process.env.IGDB_API_KEY
+  }
+});
+
 app.get('/', (req, res) => {
-	res.send('Game Tracker middleware')
+  res.send(`Game Tracker middleware`)
 })
 
+// Search by name
 app.get('/search/:search', (req, res) => {
-  axios.get(`https://api-v3.igdb.com/games/?search=${req.params.search}`, {
-    headers: {
-      'user-key': 'b5c33ea3b5c328adc8ac600dea758bc1',
-      Accept: 'application/json'
-    }
-  })
+  instance.get(`/games/?search=${req.params.search}&fields=name`)
   .then(response => {
     res.send(response.data)
-    // res.send({hello: 'world'})
   })
   .catch(e => {
     console.log('error', e);
