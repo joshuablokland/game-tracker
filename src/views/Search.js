@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 class Search extends Component {
 
@@ -12,8 +13,15 @@ class Search extends Component {
     this.getSearchResults()
   }
 
+  componentDidUpdate() {
+    this.getSearchResults()
+  }
+
   getSearchResults() {
-    fetch('http://localhost:5000/search/mario')
+    const pathName = this.props.location.pathname
+    const searchKey = this.convertPathNameToSearchKey(pathName)
+
+    fetch(`http://localhost:5000/search/${searchKey}`)
       .then(r => r.json())
       .then(d => {
         this.setState({searchResults: d})
@@ -21,13 +29,18 @@ class Search extends Component {
       .catch(e => e)
   }
 
+  convertPathNameToSearchKey = str => {
+    return str.trim().split('/')[2].replace('-', '%20')
+  }
+
   render () {
+    const searchResults = (this.state.searchResults) ? this.state.searchResults.map(game => <div key={game.id}>{game.name}</div>) : null
     return (
       <div>
-        {JSON.stringify(this.state.searchResults)}
+        {searchResults}
       </div>
     )
   }
 }
 
-export default Search
+export default withRouter(Search)

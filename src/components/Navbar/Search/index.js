@@ -14,7 +14,8 @@ class Search extends Component {
   
   handleSubmit = event => {
     event.preventDefault()
-    this.props.history.push(SEARCH + '/' + this.state.search);
+    const searchString = this.state.search.replace(' ', '-')
+    this.props.history.push(SEARCH + '/' + searchString);
   }
 
   render() {
