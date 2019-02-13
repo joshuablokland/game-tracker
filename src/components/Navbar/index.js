@@ -72,7 +72,7 @@ export class Navbar extends Component {
   
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
-        <a className="navbar-brand" href="http://localhost:3000">Game Tracker</a>
+        <NavLink exact className="navbar-brand" activeClassName="active" to={HOME}>Game Tracker</NavLink>
         <Search />
         <div className="collapse navbar-collapse show flex-grow-0" id="navbarNav">
           <ul className="navbar-nav">

@@ -25,3 +25,13 @@ body {
   width: 2.5rem;
   height: auto;
 }
+
+.navbar-search {
+  position: relative;
+
+  .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
