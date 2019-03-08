@@ -32,7 +32,7 @@ class Search extends Component {
           type="text" 
           placeholder="Search bitch..." 
           name="search" 
-          autocomplete="off" 
+          autoComplete="off" 
           onChange={this.handleChange}
         />
         <button disabled={disabledButton} className="btn btn-link btn-md" action='submit'>
