@@ -1,5 +1,6 @@
 import app from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/database'
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -15,6 +16,7 @@ class Firebase {
     app.initializeApp(config)
 
     this.auth = app.auth()
+    this.database = app.database()
   }
 
   doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password)
@@ -30,6 +32,9 @@ class Firebase {
   doUpdateProfile = options => this.auth.currentUser.updateProfile(options)
 
   doSendEmailVerification = () => this.auth.currentUser.sendEmailVerification()
+
+  doCreateRentalList = (userID, gameID) => this.database.ref('owned/' + userID).child(gameID).set(true)
+  
 }
 
 export default Firebase;
