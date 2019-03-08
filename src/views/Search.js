@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import SearchResult from '../components/SearchResult'
+import mockData from '../mockData';
 
 class Search extends Component {
 
@@ -8,7 +9,8 @@ class Search extends Component {
     super(props)
 
     this.state = {
-      searchResults: null
+      // searchResults: null
+      searchResults: mockData
     }
 
     this.getSearchResults()
@@ -35,7 +37,10 @@ class Search extends Component {
   }
 
   render () {
-    const searchResults = (this.state.searchResults) ? this.state.searchResults.map(game => <SearchResult key={game.id} title={game.name} />) : null
+    const searchResults = (this.state.searchResults) 
+      ? this.state.searchResults.map(game => <SearchResult key={game.id} title={game.name} gameID={game.id} />) 
+      : null
+
     return (
       <div className="container-fluid py-4">
         <div className="row">
