@@ -19,22 +19,29 @@ class Firebase {
     this.database = app.database()
   }
 
-  doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password)
+  createUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password)
 
-  doSignInWithEmailAndPassword = (email, password) => this.auth.signInWithEmailAndPassword(email, password)
+  signInWithEmailAndPassword = (email, password) => this.auth.signInWithEmailAndPassword(email, password)
 
-  doSignOut = () => this.auth.signOut()
+  signOut = () => this.auth.signOut()
 
-  doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
+  passwordReset = email => this.auth.sendPasswordResetEmail(email)
 
-  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password)
+  passwordUpdate = password => this.auth.currentUser.updatePassword(password)
 
-  doUpdateProfile = options => this.auth.currentUser.updateProfile(options)
+  updateProfile = options => this.auth.currentUser.updateProfile(options)
 
-  doSendEmailVerification = () => this.auth.currentUser.sendEmailVerification()
+  sendEmailVerification = () => this.auth.currentUser.sendEmailVerification()
 
-  doCreateRentalList = (userID, gameID) => this.database.ref('owned/' + userID).child(gameID).set(true)
+  addToOwnedList = (userID, gameID, cb) => this.database.ref('owned/' + userID).child(gameID).set(true, error => cb(error))
   
+  getGameFromOwned = (userID, gameID) => {
+    // this.database.ref('owned/').child('nftfmlUSJAS743Y7ZCIQfFKy5Yz1').on('value', snap => snap)
+    const starCountRef = this.database.ref().child('owned/nftfmlUSJAS743Y7ZCIQfFKy5Yz1/456123')
+    let snap;
+    starCountRef.on('value', ss => console.log(ss))
+  // return snap;    
+  }
 }
 
 export default Firebase;

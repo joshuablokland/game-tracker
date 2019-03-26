@@ -64,7 +64,7 @@ class ProfileForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.firebase.doUpdateProfile(this.state.user)
+    this.props.firebase.updateProfile(this.state.user)
       .then(() => {
         this.props.onSetUserName(this.state.user.displayName)
         this.setState({
@@ -84,7 +84,7 @@ class ProfileForm extends Component {
   handleClick = event => {
     event.preventDefault()
     
-    this.props.firebase.doSendEmailVerification()
+    this.props.firebase.sendEmailVerification()
       .then(() => {
         this.setState({
           success: `An email has been sent to ${this.state.user.email}`

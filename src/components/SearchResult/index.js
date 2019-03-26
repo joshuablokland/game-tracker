@@ -3,9 +3,32 @@ import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
 
 class SearchResult extends Component {
+
+  constructor(props) {
+    super(props)
+ 
+    this.state = {
+      isAdded: false,
+      isInOwnedList: false
+    }
+
+    // this.props.firebase.
+    console.log(this.props.firebase.getGameFromOwned())
+    
+  }
   
+  componentDidMount() {
+    // console.log(this.props.userUID)
+  }
+
   onClick = event => {
-    this.props.firebase.doCreateRentalList(this.props.userUID, this.props.gameID)
+    this.props.firebase.addToOwnedList(this.props.userUID, this.props.gameID, error => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('it fucking worked')
+      }
+    })
   }
 
   render() {

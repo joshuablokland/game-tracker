@@ -36,7 +36,7 @@ export class Navbar extends Component {
   }
 
   onUserSignOut = () => {
-    this.props.firebase.doSignOut()
+    this.props.firebase.signOut()
   }
 
   onModalStatusChanged = status => {
