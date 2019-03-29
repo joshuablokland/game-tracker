@@ -8,6 +8,11 @@
   height: 100vh;
   flex-direction: column;
   overflow: hidden;
+  background: linear-gradient(180deg, #FFFFFF 45.51%, #E9F3FC 100%);
+
+  h1 {
+    margin-bottom: 2.5rem;
+  }
 }
 
 .gt-sign-in-form {
@@ -16,6 +21,10 @@
   background-color: $white;
   box-shadow: 0px 0px 30px rgba(13, 60, 105, 0.12), 0px 0px 8px rgba(13, 60, 105, 0.07);
   padding: 2.5rem 2rem;
+
+  .gt-btn {
+    margin-top: 1.5rem;
+  }
 }
 
 .gt-sign-in-img {

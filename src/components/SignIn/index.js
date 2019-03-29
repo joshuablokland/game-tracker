@@ -65,7 +65,7 @@ class SignIn extends Component {
       <div className="gt-sign-in">
         <img src={mario} width={488} height={842} className="gt-sign-in-img" style={{left: 0}} />
         <img src={yoshi} width={464} height={707} className="gt-sign-in-img" style={{right: 0}} />
-        <h1 className="">Game Tracker</h1>
+        <h1>Game Tracker</h1>
         <form className="gt-sign-in-form" onSubmit={this.onSubmit}>
           <InputField 
             name={"email"}
