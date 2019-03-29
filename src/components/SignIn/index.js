@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Spring, Transition } from 'react-spring/renderprops'
 import { withFirebase } from '../../firebase'
 import Alert, { ALERT_TYPES } from '../Alert'
-import validateEmail from './validateEmail'
 import { Button, InputField } from '../Forms'
-import './style.scss'
-import mario from '../../assets/sign-in-mario.png'
-import yoshi from '../../assets/sign-in-yoshi.png'
+import validateEmail from './validateEmail'
+import Mario from './Mario'
+import Yoshi from './Yoshi'
 
 class SignIn extends Component {
 
@@ -60,29 +60,47 @@ class SignIn extends Component {
     const email = this.state.email
     const validForm = this.state.validForm
     const error = (this.state.error) ? <Alert type={ALERT_TYPES.danger}>{this.state.error}</Alert> : null
+    const gameTracker = String('Game Tracker').split('').map((x, i) => ({key: i, text: x}))
 
     return (
       <div className="gt-sign-in">
-        <img src={mario} width={488} height={842} className="gt-sign-in-img" style={{left: 0}} />
-        <img src={yoshi} width={464} height={707} className="gt-sign-in-img" style={{right: 0}} />
-        <h1>Game Tracker</h1>
-        <form className="gt-sign-in-form" onSubmit={this.onSubmit}>
-          <InputField 
-            name={"email"}
-            type={"email"}
-            placeholder="Email address"
-            onChange={this.handleInputChange}
-            onBlur={() => validateEmail(email)}
-          />
-          <InputField 
-            name={"password"}
-            type={"password"}
-            placeholder="Password"
-            onChange={this.handleInputChange}
-          />
-          { error }
-          <Button type="submit" disabled={!validForm} classes={['btn-block']}>Sign in</Button>
-        </form>
+        <Mario />
+        <Yoshi />
+        <Spring from={{ opacity: 0, marginBottom: -100 }} to={{ opacity: 1, marginBottom: 0 }} delay={500} easing="ease-in-out">
+          {(props) => (
+            <div style={props}>
+              <h1>
+                <Transition 
+                  items={gameTracker} 
+                  keys={item => item.key}
+                  from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
+                  enter={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
+                  leave={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
+                  trail={65}
+                >
+                  {item => props => <span style={props}>{item.text}</span>}
+                </Transition>
+              </h1>
+              <form className="gt-sign-in-form" onSubmit={this.onSubmit}>
+                <InputField 
+                  name={"email"}
+                  type={"email"}
+                  placeholder="Email address"
+                  onChange={this.handleInputChange}
+                  onBlur={() => validateEmail(email)}
+                />
+                <InputField 
+                  name={"password"}
+                  type={"password"}
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                />
+                { error }
+                <Button type="submit" disabled={!validForm} classes={['btn-block']}>Sign in</Button>
+              </form>
+            </div>
+          )}
+        </Spring>
         { /* <button type="button" className="btn btn-link" onClick={this.handleClick}>Sign up</button> */ }
       </div>
     )
