@@ -1,6 +1,6 @@
-import app from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/database'
+import app from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -34,13 +34,13 @@ class Firebase {
   sendEmailVerification = () => this.auth.currentUser.sendEmailVerification()
 
   addToOwnedList = (userID, gameID, cb) => this.database.ref('owned/' + userID).child(gameID).set(true, error => cb(error))
-  
+
   getGameFromOwned = (userID, gameID) => {
     // this.database.ref('owned/').child('nftfmlUSJAS743Y7ZCIQfFKy5Yz1').on('value', snap => snap)
     const starCountRef = this.database.ref().child('owned/nftfmlUSJAS743Y7ZCIQfFKy5Yz1/456123')
     let snap;
-    starCountRef.on('value', ss => console.log(ss))
-  // return snap;    
+    // starCountRef.on('value', ss => console.log(ss))
+    // return snap;    
   }
 }
 

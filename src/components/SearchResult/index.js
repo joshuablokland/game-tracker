@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import { withFirebase } from '../../firebase'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withFirebase } from '../../firebase';
 
 class SearchResult extends Component {
 
   constructor(props) {
     super(props)
- 
+
     this.state = {
       isAdded: false,
       isInOwnedList: false
     }
 
     // this.props.firebase.
-    console.log(this.props.firebase.getGameFromOwned())
-    
+    // console.log(this.props.firebase.getGameFromOwned())
+
   }
-  
+
   componentDidMount() {
     // console.log(this.props.userUID)
   }
@@ -43,7 +43,7 @@ class SearchResult extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = (state) => ({
   userLoggedIn: state.userLoggedIn,
   userUID: state.user.uid
 })
