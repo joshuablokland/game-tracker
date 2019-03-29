@@ -6,12 +6,10 @@ import Authentication from './components/Authentication'
 import Modal, { MODAL_SIZES } from './components/Modal'
 import Navbar from './components/Navbar'
 import { ACCOUNT, HOME, SEARCH } from './constants/routes'
-import './scss/main.scss'
+import './styles/main.scss'
 import Account from './views/Account'
 import Home from './views/Home'
 import Search from './views/Search'
-
-
 
 export class App extends Component {
 

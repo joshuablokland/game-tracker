@@ -1,0 +1,13 @@
+@import 'utils';
+
+.gt-input-field {
+  width: 100%;
+  font-size: 1.125rem;
+  border: 2px solid #DCE3F1;
+
+  &:focus {
+    border-color: #1586F0;
+    outline: none;
+  }
+  
+}
