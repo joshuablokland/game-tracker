@@ -14,7 +14,7 @@ const InputField = ({
       type={type || ''}
       placeholder={placeholder || ''}
       className='gt-input-field'
-      autocomplete='off'
+      autoComplete='off'
       onChange={onChange}
       onBlur={onBlur}
     />

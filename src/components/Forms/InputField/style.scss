@@ -1,13 +1,32 @@
-@import 'utils';
+@import '../../../styles/utils';
 
 .gt-input-field {
   width: 100%;
   font-size: 1.125rem;
-  border: 2px solid #DCE3F1;
+  line-height: 1.5rem;
+  border-radius: 1.625rem;
+  padding: .75rem 1.25rem;
+  text-align: center;
+  border: 2px solid $border-grey;
+  color: $blue;
+  box-shadow: 0px 0px 0px rgba(21, 134, 240, 0);
+  transition: 0.15s ease-in-out border, 0.15s ease-in-out color, 0.15s ease-in-out box-shadow;
+
+  &::placeholder {
+    color: $grey;
+  }
 
   &:focus {
-    border-color: #1586F0;
+    border-color: $blue;
+    box-shadow: 0px 0px 8px rgba(21, 134, 240, 0.25);
     outline: none;
+
+    &::placeholder {
+      color: transparent;
+    }
   }
-  
+}
+
+.gt-input-field + .gt-input-field {
+  margin-top: 1rem;
 }

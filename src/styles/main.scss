@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
+@import 'utils';
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: 'Fredoka One';
+  font-size: 2.5rem;
+  color: $blue;
 }
 
 .form-group-validation-icon {

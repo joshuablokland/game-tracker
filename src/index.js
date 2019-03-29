@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import user from './store/reducers/user';
+import user from './store/reducers/user'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Firebase, { FirebaseContext } from './firebase'

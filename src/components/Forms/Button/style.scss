@@ -1,0 +1,25 @@
+@import '../../../styles/utils';
+
+.gt-btn {
+  font-size: 1.125rem;
+  padding: .75rem 1.25rem;
+  background-color: $blue;
+  border-radius: 1.625rem;
+  border: none;
+  color: $white;
+  font-weight: 600;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $blue-hover;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.gt-btn.btn-block {
+  display: block;
+}
