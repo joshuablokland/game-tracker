@@ -4,7 +4,6 @@ export const setModalStatus = status => ({
   payload: status
 })
 
-
 export const SET_USER_STATUS = 'SET_USER_STATUS'
 export const setUserStatus = status => ({
   type: SET_USER_STATUS,

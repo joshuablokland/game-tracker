@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
-import { HOME, ACCOUNT } from '../../routes'
-
-import { withFirebase } from '../../firebase'
 import { connect } from 'react-redux'
-import { setModalStatus, setUserStatus, setUser } from '../../store/actionTypes'
-
-import Gravatar from '../Gravatar'
+import { NavLink } from 'react-router-dom'
+import { ACCOUNT, HOME } from '../../constants/routes'
+import { withFirebase } from '../../firebase'
+import { setModalStatus, setUser, setUserStatus } from '../../store/actionTypes'
 import Dropdown from '../Dropdown'
+import Gravatar from '../Gravatar'
 import Search from './Search'
+
+
 
 export class Navbar extends Component {
 
@@ -16,7 +16,7 @@ export class Navbar extends Component {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       const isLoggedIn = authUser ? true : false
       this.onUserStatusChanged(isLoggedIn)
-      if (isLoggedIn) { 
+      if (isLoggedIn) {
         this.onSetUser(authUser)
       }
     })
@@ -51,10 +51,10 @@ export class Navbar extends Component {
         </li>
       )
     } else {
-      const userAvatar = this.props.user.email 
+      const userAvatar = this.props.user.email
         ? (
           <div>
-            <span className="py-2 ml-1 d-inline-flex">{ this.props.user.displayName }</span>
+            <span className="py-2 ml-1 d-inline-flex">{this.props.user.displayName}</span>
             <Gravatar email={this.props.user.email} />
           </div>
         ) : 'Profile'
@@ -69,7 +69,7 @@ export class Navbar extends Component {
 
   render() {
     const profileMenu = this.renderProfileMenu(this.props.userLoggedIn)
-  
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
         <NavLink exact className="navbar-brand" activeClassName="active" to={HOME}>Game Tracker</NavLink>
@@ -79,7 +79,7 @@ export class Navbar extends Component {
             <li className="nav-item">
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
-            { profileMenu }
+            {profileMenu}
           </ul>
         </div>
       </nav>
@@ -87,7 +87,7 @@ export class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = (state) => ({
   userLoggedIn: state.userLoggedIn,
   user: state.user
 })

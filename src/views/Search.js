@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import SearchResult from '../components/SearchResult';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import SearchResult from '../components/SearchResult'
+import mockData from '../mockData'
 
 class Search extends Component {
 
