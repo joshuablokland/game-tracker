@@ -40,12 +40,9 @@ class SignIn extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    
+
     const { email, password } = this.state
-    /*.then(() => {
-        this.setState({ ...INITIAL_STATE })
-        this.onModalStatusChanged(false)
-      }) */
+
     this.props.firebase
       .signInWithEmailAndPassword(email, password)
       .catch(error => {

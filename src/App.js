@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withFirebase } from './firebase'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { setUserStatus } from './store/actionTypes'
+import { setUserStatus, setUser } from './store/actionTypes'
 
 import '../node_modules/bootstrap/scss/bootstrap.scss'
 import './styles/main.scss'
@@ -17,7 +17,24 @@ import Search from './views/Search'
 class App extends Component {
   
   componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => this.props.setUserStatus(authUser))
+    this.checkUser()
+  }
+
+  componentDidUpdate() {
+    this.checkUser()
+  }
+
+  checkUser() {
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      this.props.setUserStatus(authUser)
+      if (authUser) {
+        this.props.setUser({
+          displayName: authUser.displayName,
+          email: authUser.email,
+          uid: authUser.uid
+        })
+      }
+    })
   }
 
   render() {
@@ -39,7 +56,8 @@ class App extends Component {
 const mapStateToProps = ({userLoggedIn}) => ({userLoggedIn})
 const mapDispatchToProps = dispatch => {
   return {
-    setUserStatus: authUser => dispatch(setUserStatus(authUser))
+    setUserStatus: authUser => dispatch(setUserStatus(authUser)),
+    setUser: user => dispatch(setUser(user))
   }
 }
 

@@ -1,74 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { ACCOUNT, HOME } from '../../constants/routes'
+import { HOME } from '../../constants/routes'
 import { withFirebase } from '../../firebase'
-import { setModalStatus, setUser, setUserStatus } from '../../store/actionTypes'
-import Dropdown from '../Dropdown'
-import Gravatar from '../Gravatar'
+import { setUserStatus } from '../../store/actionTypes'
 import Search from './Search'
-
-
+import ProfileMenu from './ProfileMenu'
 
 export class Navbar extends Component {
 
-  componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => {
-      const isLoggedIn = authUser ? true : false
-      this.onUserStatusChanged(isLoggedIn)
-      if (isLoggedIn) {
-        this.onSetUser(authUser)
-      }
-    })
-  }
-
-  onUserStatusChanged = status => {
-    this.props.onUserStatusChanged(status)
-  }
-
-  onSetUser = user => {
-    const _user = {
-      displayName: user.displayName,
-      email: user.email,
-      uid: user.uid
-    }
-    this.props.onSetUser(_user)
-  }
-
   onUserSignOut = () => {
     this.props.firebase.signOut()
-  }
-
-  onModalStatusChanged = status => {
-    this.props.onModalStatusChanged(status)
-  }
-
-  renderProfileMenu = userStatus => {
-    if (!userStatus) {
-      return (
-        <li className="nav-item">
-          <span onClick={() => this.onModalStatusChanged(true)} id="signIn" className="nav-link force-hover">Sign in</span>
-        </li>
-      )
-    } else {
-      const userAvatar = this.props.user.email
-        ? (
-          <div>
-            <span className="py-2 ml-1 d-inline-flex">{this.props.user.displayName}</span>
-            <Gravatar email={this.props.user.email} />
-          </div>
-        ) : 'Profile'
-      return (
-        <Dropdown label={userAvatar} align="dropdown-menu-right">
-          <span onClick={this.onUserSignOut} id="signOut" className="force-hover dropdown-item">Sign out</span>
-          <NavLink className="dropdown-item" activeClassName="" to={ACCOUNT}>Account</NavLink>
-        </Dropdown>
-      )
-    }
+    this.props.onUserStatusChanged(false)
   }
 
   render() {
-    const profileMenu = this.renderProfileMenu(this.props.userLoggedIn)
+    const { userLoggedIn, user } = this.props
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
@@ -79,7 +26,7 @@ export class Navbar extends Component {
             <li className="nav-item">
               <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
             </li>
-            {profileMenu}
+            <ProfileMenu userStatus={userLoggedIn} user={user} onUserSignOut={this.onUserSignOut} />
           </ul>
         </div>
       </nav>
@@ -94,9 +41,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUserStatusChanged: status => dispatch(setUserStatus(status)),
-    onModalStatusChanged: status => dispatch(setModalStatus(status)),
-    onSetUser: user => dispatch(setUser(user))
+    onUserStatusChanged: status => dispatch(setUserStatus(status))
   }
 }
 
