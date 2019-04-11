@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setUserStatus } from '../../store/actionTypes'
 import { Spring, Transition } from 'react-spring/renderprops'
 import { withFirebase } from '../../firebase'
 import Alert, { ALERT_TYPES } from '../Alert'
@@ -20,10 +21,6 @@ class SignIn extends Component {
   validateForm = () => validateEmail(this.state.email) && this.validatePassword()
 
   validatePassword = () => this.state.password !== ''
-
-  // handleClick = event => this.props.signUpLinkClicked({render: SIGN_UP})
-
-  onModalStatusChanged = status => this.props.onModalStatusChanged(status)
 
   handleInputChange = event => {
     const inputfield = {}
@@ -54,6 +51,8 @@ class SignIn extends Component {
       .catch(error => {
         this.setState({ error: error.message })
       });
+    
+    this.props.firebase.auth.onAuthStateChanged(authUser => this.props.setUserStatus(authUser))
   }
 
   render() {
@@ -107,6 +106,10 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = ({ userLoggedIn }) => ({ userLoggedIn: userLoggedIn })
+const mapDispatchToProps = dispatch => {
+  return {
+    setUserStatus: status => dispatch(setUserStatus(status))
+  }
+}
 
-export default connect(mapStateToProps)(withFirebase(SignIn))
+export default connect(null, mapDispatchToProps)(withFirebase(SignIn))
