@@ -61,32 +61,35 @@ class SignUpForm extends Component {
   render() {
     const email = this.state.email
     const validForm = this.state.validForm
-    const validEmailIcon = (validateEmail(email)) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
-    const validPasswordIcon = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon text-success" /> : null
+    const validEmailIcon = (validateEmail(email)) ? <FontAwesomeIcon icon={faCheck} className="fa-icon" /> : null
+    const validPasswordIcon = (this.validatePassword()) ? <FontAwesomeIcon icon={faCheck} className="fa-icon" /> : null
     const error = (this.state.error) ? <Alert type={ALERT_TYPES.danger}>{this.state.error}</Alert> : null
 
     return (
       <form className="gt-sign-in-form" onSubmit={this.onSubmit}>
-      {/* { validEmailIcon } */}
         <InputField 
           name={"email"}
           type={"email"}
           placeholder="Email address"
           onChange={this.handleInputChange}
+          iconVerified={validEmailIcon}
+          validation={validateEmail(email)}
           onBlur={() => validateEmail(email)}
         />
-        {/* { validPasswordIcon } */}
         <InputField 
           name={"password"}
           type={"password"}
           placeholder="Password"
+          iconVerified={validPasswordIcon}
+          validation={this.validatePassword()}
           onChange={this.handleInputChange}
         />
-        {/* { validPasswordIcon } */}
         <InputField 
           name={"passwordVerification"}
           type={"password"}
           placeholder="Password verification"
+          iconVerified={validPasswordIcon}
+          validation={this.validatePassword()}
           onChange={this.handleInputChange}
         />
         {error}

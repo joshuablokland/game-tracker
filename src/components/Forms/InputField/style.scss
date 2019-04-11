@@ -1,5 +1,18 @@
 @import '../../../styles/utils';
 
+.gt-input-field-wrapper {
+  position: relative;
+  display: block;
+}
+
+.gt-input-field-icon-verified {
+  position: absolute;
+  top: 50%;
+  right: 1.2rem;
+  transform: translateY(-50%);
+  color: $green;
+}
+
 .gt-input-field {
   width: 100%;
   font-size: 1.125rem;
@@ -16,6 +29,11 @@
     color: $grey;
   }
 
+  &.valid {
+    color: $green;
+    border-color: $green;
+  }
+
   &:focus {
     border-color: $blue;
     box-shadow: 0px 0px 8px rgba(21, 134, 240, 0.25);
@@ -24,9 +42,14 @@
     &::placeholder {
       color: transparent;
     }
+    
+    &.valid {
+      border-color: $green;
+      box-shadow: 0px 0px 8px rgba(25, 197, 10, 0.25);
+    }
   }
 }
 
-.gt-input-field + .gt-input-field {
+.gt-input-field-wrapper + .gt-input-field-wrapper {
   margin-top: 1rem;
 }

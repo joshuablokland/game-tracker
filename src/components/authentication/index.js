@@ -51,7 +51,7 @@ class Authentication extends Component {
         <Yoshi />
         <Spring from={{ opacity: 0, marginBottom: -100 }} to={{ opacity: 1, marginBottom: 0 }} delay={500} easing="ease-in-out">
           {(props) => (
-            <div style={props}>
+            <div className="gt-sign-in-holder" style={props}>
               <h1>
                 <Transition 
                   items={gameTracker} 
