@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import SignIn from '../components/SignIn'
+import Authentication from '../components/Authentication';
 
 const HomePage = () => {
   return (
@@ -20,7 +20,7 @@ const HomePage = () => {
   )
 }
 
-const Home = ({userLoggedIn}) => userLoggedIn ? <HomePage /> : <SignIn />
+const Home = ({userLoggedIn}) => userLoggedIn ? <HomePage /> : <Authentication />
 
 const mapStateToProps = ({userLoggedIn}) => ({ userLoggedIn: userLoggedIn })
 

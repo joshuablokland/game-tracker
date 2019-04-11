@@ -23,3 +23,12 @@
 .gt-btn.btn-block {
   display: block;
 }
+
+.gt-btn.btn-link {
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $blue;
+}
