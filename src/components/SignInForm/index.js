@@ -7,7 +7,7 @@ import { withFirebase } from '../../firebase'
 import styles from '../Authentication/style.module.scss'
 
 import Alert, { ALERT_TYPES } from '../Alert'
-import { Button, InputField } from '../Forms'
+import { Button, BUTTON_DISPLAYS, InputField } from '../Forms'
 
 
 class SignIn extends Component {
@@ -68,7 +68,7 @@ class SignIn extends Component {
           onChange={this.handleInputChange}
         />
         { error }
-        <Button type="submit" disabled={!validForm} classes={['btn-block']}>Sign in</Button>
+        <Button type="submit" disabled={!validForm} display={BUTTON_DISPLAYS.BLOCK}>Sign in</Button>
       </form>      
     )
   }

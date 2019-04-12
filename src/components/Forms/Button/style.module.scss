@@ -21,10 +21,13 @@
 }
 
 .default {
+  background-color: $blue;
+  background-color: $blue-hover;
 }
 
-.gtBtn.btnBlock {
+.block {
   display: block;
+  width: 100%;
 }
 
 .link {
