@@ -1,11 +1,11 @@
 import React from 'react'
-import './style.scss'
+import styles from './style.module.scss'
 
 function validationClass (valid) {
   if (valid) {
-    return 'valid'
+    return styles.valid
   }
-  return 'invalid'
+  return styles.invalid
 }
 
 const InputField = ({
@@ -20,18 +20,18 @@ const InputField = ({
   const validClass = validation !== undefined ? validationClass(validation) : ''
 
   return (
-    <div className="gt-input-field-wrapper">
+    <div className={styles.gtInputFieldWrapper}>
       <input 
         name={name || ''}
         type={type || ''}
         placeholder={placeholder || ''}
-        className={`gt-input-field ${validClass}`}
+        className={`${styles.gtInputField} ${validClass}`}
         autoComplete='off'
         onChange={onChange}
         onBlur={onBlur}
       />
       { iconVerified && (
-        <div className="gt-input-field-icon-verified">{iconVerified}</div>
+        <div className={styles.gtInputFieldIconVerified}>{iconVerified}</div>
       )}
     </div>
   )

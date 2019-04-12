@@ -1,6 +1,6 @@
 @import '../../../styles/utils';
 
-.gt-btn {
+.gtBtn {
   font-size: 1.125rem;
   padding: .75rem 1.25rem;
   background-color: $blue;
@@ -20,11 +20,14 @@
   }
 }
 
-.gt-btn.btn-block {
+.default {
+}
+
+.gtBtn.btnBlock {
   display: block;
 }
 
-.gt-btn.btn-link {
+.link {
   font-size: inherit;
   font-weight: inherit;
   padding: 0;

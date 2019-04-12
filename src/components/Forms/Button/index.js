@@ -1,16 +1,29 @@
 import React from 'react'
-import './style.scss'
+import styles from './style.module.scss'
 
-const Button = ({children, type, classes, onClick}) => {
-  
-  if ( !Array.isArray(classes) ) {
-    classes = []
+const BUTTON_TYPES = {
+  DEFAULT: 0,
+  LINK: 10
+}
+
+function getType(types) {
+  switch(types) {
+    case BUTTON_TYPES.default:
+      return styles.default
+    case BUTTON_TYPES.link:
+      return styles.link
+    default:
+      return styles.default
   }
+}
+
+const Button = ({children, type, onClick}) => {
+  const btnType = getType(type)
 
   return (
     <button 
       type={type || 'button'}
-      className={`gt-btn ${classes.join(' ')}`}
+      className={`${styles.gtBtn} ${btnType}`}
       onClick={onClick}
     >
       {children}
@@ -19,3 +32,4 @@ const Button = ({children, type, classes, onClick}) => {
 }
 
 export default Button
+export { BUTTON_TYPES }

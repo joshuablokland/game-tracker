@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Spring, Transition } from 'react-spring/renderprops'
-
-import { Button } from '../Forms'
+import styles from './style.module.scss'
+import { Button, BUTTON_TYPES } from '../Forms'
 import SignInForm from '../SignInForm'
 import SignUpForm from '../SignUpForm'
 import Mario from './Mario'
@@ -15,13 +15,13 @@ const AuthenticationForm = ({ render, toggle }) => {
   const form = ifSignIn ? <SignInForm /> : <SignUpForm />
   const toggleText = ifSignIn ? <span>Don’t have an account yet </span> : null
   const toggleButton = ifSignIn 
-    ? <Button classes={['btn-link']} onClick={toggle}>Sign Up!</Button>
-    : <Button classes={['btn-link']} onClick={toggle}>Go back to Sign In.</Button>
+    ? <Button type={BUTTON_TYPES.LINK} onClick={toggle}>Sign Up!</Button>
+    : <Button type={BUTTON_TYPES.LINK} onClick={toggle}>Go back to Sign In.</Button>
 
   return (
     <Fragment>
       {form}
-      <p className="gt-sign-up-text">{toggleText}{toggleButton}</p>
+      <p className={styles.gtSignUpText}>{toggleText}{toggleButton}</p>
     </Fragment>
   )
 }
@@ -46,12 +46,12 @@ class Authentication extends Component {
     const gameTracker = String('Game Tracker').split('').map((x, i) => ({key: i, text: x}))
 
     return (
-      <div className="gt-sign-in">
+      <div className={styles.gtSignIn}>
         <Mario />
         <Yoshi />
         <Spring from={{ opacity: 0, marginBottom: -100 }} to={{ opacity: 1, marginBottom: 0 }} delay={500} easing="ease-in-out">
           {(props) => (
-            <div className="gt-sign-in-holder" style={props}>
+            <div className={styles.gtSignInHolder} style={props}>
               <h1>
                 <Transition 
                   items={gameTracker} 

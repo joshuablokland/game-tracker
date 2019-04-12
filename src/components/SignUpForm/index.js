@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { withFirebase } from '../../firebase'
-import validateEmail from '../../utils/validateEmail';
-
+import validateEmail from '../../utils/validateEmail'
+import styles from '../Authentication/style.module.scss'
 import Alert, { ALERT_TYPES } from '../Alert'
 import { Button, InputField } from '../Forms'
 
@@ -66,7 +66,7 @@ class SignUpForm extends Component {
     const error = (this.state.error) ? <Alert type={ALERT_TYPES.danger}>{this.state.error}</Alert> : null
 
     return (
-      <form className="gt-sign-in-form" onSubmit={this.onSubmit}>
+      <form className={styles.gtSignInForm} onSubmit={this.onSubmit}>
         <InputField 
           name={"email"}
           type={"email"}

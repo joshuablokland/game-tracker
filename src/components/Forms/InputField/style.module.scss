@@ -1,11 +1,11 @@
 @import '../../../styles/utils';
 
-.gt-input-field-wrapper {
+.gtInputFieldWrapper {
   position: relative;
   display: block;
 }
 
-.gt-input-field-icon-verified {
+.gtInputFieldIconVerified {
   position: absolute;
   top: 50%;
   right: 1.2rem;
@@ -13,7 +13,7 @@
   color: $green;
 }
 
-.gt-input-field {
+.gtInputField {
   width: 100%;
   font-size: 1.125rem;
   line-height: 1.5rem;
@@ -50,6 +50,6 @@
   }
 }
 
-.gt-input-field-wrapper + .gt-input-field-wrapper {
+.gtInputFieldWrapper + .gtInputFieldWrapper {
   margin-top: 1rem;
 }

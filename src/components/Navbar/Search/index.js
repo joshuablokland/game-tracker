@@ -35,7 +35,7 @@ class Search extends Component {
           autoComplete="off"
           onChange={this.handleChange}
         />
-        <button disabled={disabledButton} className="btn btn-link btn-md" action='submit'>
+        <button disabled={disabledButton} className="btn btnLink btn-md" action='submit'>
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </form>
