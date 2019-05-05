@@ -25,38 +25,24 @@ const SPACING_DIRECTION = {
 
 const Spacing = ({ children, type, amount, direction }) => {
   const _type = type => {
-    if(type === SPACING_TYPES.MARGIN) {
-      
-    } else {
-
-    }
+    return type === SPACING_TYPES.MARGIN ? 'margin' : 'padding'
   }
 
-  const _amount = amount => {
-    switch(amount) {
-      case SPACING_AMOUNT.SMALL: return;
-      case SPACING_AMOUNT.NORMAL: return;
-      case SPACING_AMOUNT.MEDIUM: return;
-      case SPACING_AMOUNT.LARGE: return;
-      default: return;
-    }
-  }
-
-  const _direction = direction => {
+  const spacing = direction => {
     switch(direction) {
-      case SPACING_DIRECTION.TOP: return;
-      case SPACING_DIRECTION.RIGHT: return;
-      case SPACING_DIRECTION.BOTTOM: return;
-      case SPACING_DIRECTION.LEFT: return;
-      case SPACING_DIRECTION.X: return;
-      case SPACING_DIRECTION.Y: return;
-      case SPACING_DIRECTION.XY: return;
+      case SPACING_DIRECTION.TOP: return {[_type(type)+'Top']: amount};
+      case SPACING_DIRECTION.RIGHT: return ``;
+      case SPACING_DIRECTION.BOTTOM: return ``;
+      case SPACING_DIRECTION.LEFT: return ``;
+      case SPACING_DIRECTION.X: return ``;
+      case SPACING_DIRECTION.Y: return ``;
+      case SPACING_DIRECTION.XY: return ``;
       default: return;
     }
   }
-
+  
   return (
-    <div>
+    <div style={spacing(direction)}>
       {children}
     </div>
   )

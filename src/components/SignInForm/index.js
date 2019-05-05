@@ -8,7 +8,7 @@ import styles from '../Authentication/style.module.scss'
 
 import Alert, { ALERT_TYPES } from '../Alert'
 import { Button, BUTTON_DISPLAYS, InputField } from '../Forms'
-
+import Spacing, { SPACING_TYPES, SPACING_DIRECTION, SPACING_AMOUNT } from '../Spacing'
 
 class SignIn extends Component {
 
@@ -68,7 +68,9 @@ class SignIn extends Component {
           onChange={this.handleInputChange}
         />
         { error }
-        <Button type="submit" disabled={!validForm} display={BUTTON_DISPLAYS.BLOCK}>Sign in</Button>
+        <Spacing type={SPACING_TYPES.MARGIN} direction={SPACING_DIRECTION.TOP} amount={SPACING_AMOUNT.MEDIUM}>
+          <Button type="submit" disabled={!validForm} display={BUTTON_DISPLAYS.BLOCK}>Sign in</Button>
+        </Spacing>
       </form>      
     )
   }
