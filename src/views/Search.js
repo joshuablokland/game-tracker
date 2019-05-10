@@ -47,7 +47,7 @@ class Search extends Component {
       : null
 
     return (
-      <div className="appContent" style={{marginTop: 20}}>
+      <div className="appContent" style={{padding: '0 32px'}}>
         <div className="appWhiteGradient appWhiteTopCover"></div>
         {searchResults}
       </div>

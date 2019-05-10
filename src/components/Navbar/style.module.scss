@@ -1,8 +1,7 @@
 @import '../../styles/utils';
 
 .navbar {
-  z-index: 99;  
-  padding: 20px 32px;
+  z-index: 99;
   background-color: $white;
   box-shadow: 0px 0px 30px rgba(13, 60, 105, 0.12), 0px 0px 8px rgba(13, 60, 105, 0.07);
   display: flex;
@@ -10,6 +9,7 @@
 }
 
 .navbarInner {
+  padding: 20px 32px;
   display: flex;
   justify-content: center;
   align-items: center;

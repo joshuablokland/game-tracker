@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { withFirebase } from '../../firebase'
-import { setUserStatus } from '../../store/actionTypes'
 import styles from './style.module.scss'
 import Logo from '../Logo'
 import SearchField from '../SearchField'
@@ -17,48 +13,28 @@ import Search from '../../views/Search'
 export class Navbar extends Component {
 
   state = {
-    style: {
-      height: 'auto',
-      paddingBottom: 20
-    }
+    height: 'auto'
   }
 
   componentDidUpdate() {
     this.getHeight();
   }
 
-  onUserSignOut = () => {
-    this.props.firebase.signOut()
-    this.props.onUserStatusChanged(false)
-  }
-
   getHeight = () => {
     const isSearchPath = this.props.location.pathname.search(/\/search\//)
 
-    if (isSearchPath !== -1 && this.state.style.height === 'auto') {
-      this.setState({
-        style: {
-          height: '100vh',
-          paddingBottom: 0
-        }
-      })
-    } else if (isSearchPath !== 0 && this.state.style.height === '100vh') {
-      this.setState({
-        style: {
-          height: 'auto',
-          paddingBottom: 20
-        }
-      })
+    if (isSearchPath !== -1 && this.state.height === 'auto') {
+      this.setState({ height: '100vh' })
+    } else if (isSearchPath !== 0 && this.state.height === '100vh') {
+      this.setState({ height: 'auto' })
     }
   }
 
   render() {
-    const { userLoggedIn, user } = this.props
-    console.log(this.state.style)
-    const { style } = this.state
+    const { height } = this.state
 
     return (
-      <nav className={styles.navbar} style={{...style}}>
+      <nav className={styles.navbar} style={{height}}>
         <div className={styles.navbarInner}>
           <div className={styles.navbarBrand}>
             <NavLink exact to={HOME}>
@@ -69,7 +45,7 @@ export class Navbar extends Component {
             <SearchField />
           </div>
           <div className={styles.navbarProfileMenu}>
-            <ProfileMenu userStatus={userLoggedIn} user={user} onUserSignOut={this.onUserSignOut} />
+            <ProfileMenu />
           </div>
         </div>
         <Route path={SEARCH} component={Search} />
@@ -78,19 +54,4 @@ export class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  userLoggedIn: state.userLoggedIn,
-  user: state.user
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onUserStatusChanged: status => dispatch(setUserStatus(status))
-  }
-}
-
-export default compose(
-  withRouter,
-  withFirebase,
-  connect(mapStateToProps, mapDispatchToProps)
-)(Navbar)
+export default withRouter(Navbar)
