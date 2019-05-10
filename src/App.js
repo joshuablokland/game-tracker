@@ -2,17 +2,16 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withFirebase } from './firebase'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { setUserStatus, setUser } from './store/actionTypes'
 
 import '../node_modules/bootstrap/scss/bootstrap.scss'
 import './styles/main.scss'
 
 import Navbar from './components/Navbar'
-import { ACCOUNT, HOME, SEARCH } from './constants/routes'
+import { ACCOUNT, HOME } from './constants/routes'
 import Account from './views/Account'
 import Home from './views/Home'
-import Search from './views/Search'
 
 class App extends Component {
   
@@ -42,11 +41,10 @@ class App extends Component {
       <Router>
         <div id="appWrapper">
           {this.props.userLoggedIn && <Navbar /> }
-          <Switch>
+          <div className="appContent">
             <Route exact path={HOME} component={Home} />
             <Route exact path={ACCOUNT} component={Account} />
-            <Route patch={SEARCH} component={Search} />
-          </Switch>
+          </div>
         </div>
       </Router>
     )

@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col">
+        <div className="col pt-4">
           <div className="jumbotron">
             <h1 className="display-4">Hello, main homepage!</h1>
             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>

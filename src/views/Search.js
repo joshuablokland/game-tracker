@@ -9,11 +9,10 @@ class Search extends Component {
     super(props)
 
     this.state = {
+      searchKey: '',
       // searchResults: null
       searchResults: mockData
     }
-
-    this.getSearchResults()
   }
 
   componentDidUpdate() {
@@ -23,7 +22,11 @@ class Search extends Component {
   getSearchResults() {
     const pathName = this.props.location.pathname
     const searchKey = this.convertPathNameToSearchKey(pathName)
-    // console.log('getSearchResults')
+    // fixes double call
+    if (searchKey === this.state.searchKey) {
+      return;
+    }
+    this.setState({searchKey})
     /*
     fetch(`http://localhost:5000/search/${searchKey}`)
       .then(r => r.json())
@@ -44,12 +47,9 @@ class Search extends Component {
       : null
 
     return (
-      <div className="container-fluid py-4">
-        <div className="row">
-          <div className="col">
-            {searchResults}
-          </div>
-        </div>
+      <div className="appContent" style={{marginTop: 20}}>
+        <div className="appWhiteGradient appWhiteTopCover"></div>
+        {searchResults}
       </div>
     )
   }

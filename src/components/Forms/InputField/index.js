@@ -14,6 +14,7 @@ const InputField = ({
   placeholder,
   validation,
   iconVerified,
+  style,
   onChange,
   onBlur
 }) => {
@@ -27,6 +28,7 @@ const InputField = ({
         placeholder={placeholder || ''}
         className={`${styles.gtInputField} ${validClass}`}
         autoComplete='off'
+        style={style}
         onChange={onChange}
         onBlur={onBlur}
       />

@@ -1,34 +1,78 @@
 import React, { Component } from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { HOME } from '../../constants/routes'
 import { withFirebase } from '../../firebase'
 import { setUserStatus } from '../../store/actionTypes'
-import Search from './Search'
+import styles from './style.module.scss'
+import Logo from '../Logo'
+import SearchField from '../SearchField'
 import ProfileMenu from './ProfileMenu'
 
+import { Route } from 'react-router-dom'
+import { HOME, SEARCH } from '../../constants/routes'
+import Search from '../../views/Search'
+
 export class Navbar extends Component {
+
+  state = {
+    style: {
+      height: 'auto',
+      paddingBottom: 20
+    }
+  }
+
+  componentDidUpdate() {
+    this.getHeight();
+  }
 
   onUserSignOut = () => {
     this.props.firebase.signOut()
     this.props.onUserStatusChanged(false)
   }
 
+  getHeight = () => {
+    const isSearchPath = this.props.location.pathname.search(/\/search\//)
+
+    if (isSearchPath !== -1 && this.state.style.height === 'auto') {
+      this.setState({
+        style: {
+          height: '100vh',
+          paddingBottom: 0
+        }
+      })
+    } else if (isSearchPath !== 0 && this.state.style.height === '100vh') {
+      this.setState({
+        style: {
+          height: 'auto',
+          paddingBottom: 20
+        }
+      })
+    }
+  }
+
   render() {
     const { userLoggedIn, user } = this.props
+    console.log(this.state.style)
+    const { style } = this.state
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-white justify-content-between">
-        <NavLink exact className="navbar-brand" activeClassName="active" to={HOME}>Game Tracker</NavLink>
-        <Search />
-        <div className="collapse navbar-collapse show flex-grow-0" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink exact className="nav-link" activeClassName="active" to={HOME}>Home</NavLink>
-            </li>
+      <nav className={styles.navbar} style={{...style}}>
+        <div className={styles.navbarInner}>
+          <div className={styles.navbarBrand}>
+            <NavLink exact to={HOME}>
+              <Logo />
+            </NavLink>
+          </div>
+          <div className={styles.navbarSearch}>
+            <SearchField />
+          </div>
+          <div className={styles.navbarProfileMenu}>
             <ProfileMenu userStatus={userLoggedIn} user={user} onUserSignOut={this.onUserSignOut} />
-          </ul>
+          </div>
         </div>
+        <Route path={SEARCH} component={Search} />
       </nav>
     )
   }
@@ -45,4 +89,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withFirebase(Navbar))
+export default compose(
+  withRouter,
+  withFirebase,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Navbar)
